@@ -236,55 +236,56 @@ function showQuestion() {
     }
     button.addEventListener("click", selectedAnswer);
   });
-
-  function resetState() {
-    nextbutton.style.display = "none";
-    while (answerButtons.firstChild) {
-      answerButtons.removeChild(answerButtons.firstChild);
-    }
-  }
-
-  function selectedAnswer(e) {
-    const selectedBtn = e.target;
-    const isCorrect = selectedBtn.dataset.correct === "true";
-
-    if (isCorrect) {
-      selectedBtn.classList.add("correct");
-      score++;
-    } else {
-      selectedBtn.classList.add("incorrect");
-    }
-    Array.from(answerButtons.children).forEach((button) => {
-      if (button.dataset.correct === "true") {
-        button.classList.add("correct");
-      }
-      button.disabled = true;
-    });
-    nextbutton.style.display = "block";
-  }
-
-  function showScore() {
-    resetState();
-    question.innerHTML = `You scored ${score} out of${questions.length}`;
-    nextbutton.innerHTML = "Play Again";
-    nextbutton.style.display = "block";
-  }
-
-  function handleNextButton() {
-    currentQuestionIndex++;
-    if (currentQuestionIndex < questions.length) {
-      showQuestion();
-    } else {
-      showScore();
-    }
-  }
-
-  nextbutton.addEventListener("click", () => {
-    if (currentQuestionIndex < questions.length) {
-      handleNextButton();
-    } else {
-      startQuiz();
-    }
-  });
 }
+
+function resetState() {
+  nextbutton.style.display = "none";
+  while (answerButtons.firstChild) {
+    answerButtons.removeChild(answerButtons.firstChild);
+  }
+}
+
+function selectedAnswer(e) {
+  const selectedBtn = e.target;
+  const isCorrect = selectedBtn.dataset.correct === "true";
+
+  if (isCorrect) {
+    selectedBtn.classList.add("correct");
+    score++;
+  } else {
+    selectedBtn.classList.add("incorrect");
+  }
+  Array.from(answerButtons.children).forEach((button) => {
+    if (button.dataset.correct === "true") {
+      button.classList.add("correct");
+    }
+    button.disabled = true;
+  });
+  nextbutton.style.display = "block";
+}
+
+function showScore() {
+  resetState();
+  question.innerHTML = `You scored ${score} out of ${questions.length}`;
+  nextbutton.innerHTML = "Play Again";
+  nextbutton.style.display = "block";
+}
+
+function handleNextButton() {
+  currentQuestionIndex++;
+  if (currentQuestionIndex < questions.length) {
+    showQuestion();
+  } else {
+    showScore();
+  }
+}
+
+nextbutton.addEventListener("click", () => {
+  if (currentQuestionIndex < questions.length) {
+    handleNextButton();
+  } else {
+    startQuiz();
+  }
+});
+
 startQuiz();
