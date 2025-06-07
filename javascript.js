@@ -265,7 +265,7 @@ function showQuestion() {
 
   function showScore() {
     resetState();
-    question.innerHTML = `You scored ${score} out of ${questions.length}`;
+    question.innerHTML = `You scored ${score} out of${questions.length}`;
     nextbutton.innerHTML = "Play Again";
     nextbutton.style.display = "block";
   }
